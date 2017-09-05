@@ -24,6 +24,6 @@ Pod::Spec.new do |s|
 
 
   s.source_files  = "*.swift"
-  s.resource = "Material-Design-Iconic-Font.ttf"
+  s.resource_bundle = { 'ACMaterialDesignIcons' => '*.ttf' }
 
 end
