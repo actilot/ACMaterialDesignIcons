@@ -13,10 +13,12 @@ public class ACMaterialDesignIcons {
     public var iconAttributedString: NSMutableAttributedString?
     public var fontSize: CGFloat = 0.0
     
-    public static func icon(withCode code: String!, fontSize: CGFloat) {
+    public static func icon(withCode code: String!, fontSize: CGFloat) -> ACMaterialDesignIcons {
         let icon = ACMaterialDesignIcons()
         icon.fontSize = fontSize
         icon.iconAttributedString = NSMutableAttributedString(string: code, attributes: [NSFontAttributeName: iconFont(withSize: fontSize)!])
+        
+        return icon
     }
     
     public static func iconFont(withSize size: CGFloat) -> UIFont? {
