@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ACMaterialDesignIcons"
-  s.version      = "0.1.6"
+  s.version      = "0.1.7"
   s.summary      = "MaterialDesign icon api for IOS - Swift"
   s.homepage     = "https://github.com/actilot/ACMaterialDesignIcons"
   s.platform     = :ios, '10.0'
