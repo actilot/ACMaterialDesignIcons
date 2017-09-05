@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ACMaterialDesignIcons {
+public class ACMaterialDesignIcons {
     public var iconAttributedString: NSMutableAttributedString?
     public var fontSize: CGFloat = 0.0
     
