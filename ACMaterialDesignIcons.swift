@@ -27,23 +27,11 @@ public class ACMaterialDesignIcons {
             fontURL = bundle.url(forResource: name, withExtension: "ttf")!
         }
         
-        guard let data = try? Data(contentsOf: fontURL) else { return }
+        let fontDataProvider = CGDataProvider(url: fontURL as CFURL)
+        let newFont = CGFont(fontDataProvider!)
         
-        let provider = CGDataProvider(data: data as CFData)
-        var font: CGFont
-        #if swift(>=3.2)
-            font = CGFont(provider!)!
-        #else
-            font = CGFont(provider!)
-        #endif
         
-        var error: Unmanaged<CFError>?
-        if !CTFontManagerRegisterGraphicsFont(font, &error) {
-            let errorDescription: CFString = CFErrorCopyDescription(error!.takeUnretainedValue())
-            guard let nsError = error?.takeUnretainedValue() as AnyObject as? NSError else { return }
-            NSException(name: NSExceptionName.internalInconsistencyException, reason: errorDescription as String, userInfo: [NSUnderlyingErrorKey: nsError]).raise()
-        }
-
+        CTFontManagerRegisterGraphicsFont(newFont, nil)
     }
     
     public static func icon(withCode code: String!, fontSize: CGFloat) -> ACMaterialDesignIcons {
