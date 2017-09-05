@@ -4,10 +4,12 @@ Material Design Icons for IOS - Swift 3
 [![Platform](http://img.shields.io/badge/platform-ios-blue.svg?style=flat
 )](https://developer.apple.com/iphone/index.action)
 
-##About
+## About
+Based on VCMaterialDesignIcons - https://github.com/viktoricalonia/VCMaterialDesignIcons
+
 Material Design Icon Fonts are from http://zavoloklom.github.io/material-design-iconic-font/icons.html
 
-##Usage
+## Usage
     
     import ACMaterialDesignIcons
     
@@ -23,6 +25,6 @@ Material Design Icon Fonts are from http://zavoloklom.github.io/material-design-
     
     let image = icon?.image()
     
-##Installation (CocoaPods)
+## Installation (CocoaPods)
 
     pod 'ACMaterialDesignIcons'
