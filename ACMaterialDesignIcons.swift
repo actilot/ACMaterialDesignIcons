@@ -13,7 +13,42 @@ public class ACMaterialDesignIcons {
     public var iconAttributedString: NSMutableAttributedString?
     public var fontSize: CGFloat = 0.0
     
+    public static func loadFont() {
+        let bundle = Bundle(for: ACMaterialDesignIcons.self)
+        
+        let identifier = bundle.bundleIdentifier
+        let name = "Material-Design-Iconic-Font"
+        
+        var fontURL: URL
+        if identifier?.hasPrefix("org.cocoapods") == true {
+            // If this framework is added using CocoaPods, resources is placed under a subdirectory
+            fontURL = bundle.url(forResource: name, withExtension: "ttf", subdirectory: "ACMaterialDesignIcons.swift.bundle")!
+        } else {
+            fontURL = bundle.url(forResource: name, withExtension: "ttf")!
+        }
+        
+        guard let data = try? Data(contentsOf: fontURL) else { return }
+        
+        let provider = CGDataProvider(data: data as CFData)
+        var font: CGFont
+        #if swift(>=3.2)
+            font = CGFont(provider!)!
+        #else
+            font = CGFont(provider!)
+        #endif
+        
+        var error: Unmanaged<CFError>?
+        if !CTFontManagerRegisterGraphicsFont(font, &error) {
+            let errorDescription: CFString = CFErrorCopyDescription(error!.takeUnretainedValue())
+            guard let nsError = error?.takeUnretainedValue() as AnyObject as? NSError else { return }
+            NSException(name: NSExceptionName.internalInconsistencyException, reason: errorDescription as String, userInfo: [NSUnderlyingErrorKey: nsError]).raise()
+        }
+
+    }
+    
     public static func icon(withCode code: String!, fontSize: CGFloat) -> ACMaterialDesignIcons {
+        loadFont()
+        
         let icon = ACMaterialDesignIcons()
         icon.fontSize = fontSize
         icon.iconAttributedString = NSMutableAttributedString(string: code, attributes: [NSFontAttributeName: iconFont(withSize: fontSize)!])
